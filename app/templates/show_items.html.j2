@@ -1,0 +1,84 @@
+{% extends 'base.html.j2'%}
+{%block css%}
+ <link rel="stylesheet" href="{{url_for('static',filename='css/shop.css')}}">
+{%endblock%}
+
+{% block title %}
+SHOP
+{% endblock %}
+
+
+{%block content%}
+<small style="color:red;">{{error}}</small>
+<form action="{{url_for('auth.cart_items')}}" method="POST">
+
+<div class="row g-0">
+  <div class="col-sm-6 col-md-8">
+  <h1> Cart Items</h1>
+{%for item in cart_items%}
+<br>
+{{item.name}}
+<br>
+{{item.price}}
+<br>
+<img src={{item.img}} height=150px>
+<br>
+ <a class="btn btn-primary" href="{{url_for('auth.remove_items', id =item.id)}}">Remove from Cart</a>
+{%endfor%}
+  </div>
+ 
+ 
+  <div class="col-6 col-md-4">
+  <h1> Checkout </h1>
+  <div class="row">
+  <div class="col">
+    <input type="text" class="form-control" placeholder="First name" aria-label="First name">
+  </div>
+  <div class="col">
+    <input type="text" class="form-control" placeholder="Last name" aria-label="Last name">
+  </div>
+</div>
+    <form class="row g-3">
+  <div class="col-md-8">
+    <label for="inputEmail4" class="form-label">Email</label>
+    <input type="email" class="form-control" id="inputEmail4">
+  </div>
+  <div class="col-12">
+    <label for="inputAddress" class="form-label">Address</label>
+    <input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+  </div>
+  <div class="col-md-6">
+    <label for="inputCity" class="form-label">City</label>
+    <input type="text" class="form-control" id="inputCity">
+  </div>
+  <div class="col-md-4">
+     <label for="inputCity" class="form-label">State</label>
+    <input type="text" class="form-control" id="inputCity">
+      
+      
+    </select>
+  </div>
+  <div class="col-md-4">
+    <label for="inputZip" class="form-label">Zip</label>
+    <input type="text" class="form-control" id="inputZip">
+  </div>
+  <div class="col-12">
+    <div class="mb-3">
+    <label for="exampleInputPassword1" class="form-label">Credit Card Number</label>
+    <input type="password" class="form-control" id="exampleInputPassword1">
+    <div class="col-md-2">
+    <label for="inputZip" class="form-label">CVC</label>
+    <input type="text" class="form-control" id="inputZip">
+    <label for="inputZip" class="form-label">Exp Date</label>
+    <input type="text" class="form-control" id="inputZip">
+  </div>
+    </div>
+  </div>
+  <div class="col-12">
+    <a class="btn btn-primary" href="{{url_for('auth.check_out')}}">Check out</a>
+  </div>
+</form>
+  </div>
+  
+</div>
+{%endblock%}

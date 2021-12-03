@@ -1,0 +1,29 @@
+{% extends 'base.html.j2'%}
+{%block css%}
+ <link rel="stylesheet" href="{{url_for('static',filename='css/shop.css')}}">
+{%endblock%}
+
+{% block title %}
+SHOP
+{% endblock %}
+
+{% block content%}
+<small style="color:red;">{{error}}</small>
+<form action="{{url_for('auth.shop_items')}}" method="POST">
+
+<br>
+<div class="container">
+  <div class="row row-cols-2 row-cols-lg-5 g-2 g-lg-3">
+{%for item in items%}
+    <div class="col">
+      <div class="p-3 border bg-light" >
+      <h5 class="card-title">
+      <img src= '{{item.img}}' class="img-thumbnail"> 
+      {{item.name}} {{item.description}} {{item.price}}</h5>
+      </div>
+      <a class="btn btn-primary" href="{{url_for('auth.buy_items', id =item.id)}}">Add to Cart</a>
+    </div>
+{%endfor%}
+  </div>
+</div>
+{%endblock%}
